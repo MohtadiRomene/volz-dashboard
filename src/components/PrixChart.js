@@ -1,4 +1,4 @@
-const COLORS import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const ROUTES = ['ALG-CDG','ALG-IST','ALG-DXB','ORN-CDG','TUN-CDG'];
@@ -6,7 +6,6 @@ const ROUTES = ['ALG-CDG','ALG-IST','ALG-DXB','ORN-CDG','TUN-CDG'];
 export default function PrixChart({ historique }) {
   const [routeSelect, setRouteSelect] = useState('ALG-CDG');
 
-  // Construire les données du graphe depuis l'historique
   const data = historique.map(session => {
     const [orig, dest] = routeSelect.split('-');
     const vols = (session.vols || []).filter(v => v.origine === orig && v.destination === dest);
