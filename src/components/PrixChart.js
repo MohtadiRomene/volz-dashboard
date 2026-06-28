@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+const COLORS import React, { useState } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const ROUTES = ['ALG-CDG','ALG-IST','ALG-DXB','ORN-CDG','TUN-CDG'];
-const COLORS  = ['#6366f1','#10b981','#f59e0b','#ef4444','#3b82f6'];
 
 export default function PrixChart({ historique }) {
   const [routeSelect, setRouteSelect] = useState('ALG-CDG');
