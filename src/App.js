@@ -7,9 +7,9 @@ import VolsTable        from './components/VolsTable';
 
 // URL du JSON sur GitHub (remplace TON_USER et TON_REPO)
 // Remplace TON_USER par ton vrai username GitHub
-const HISTORIQUE_URL = 'https://raw.githubusercontent.com/MohtadiRomene/volz-scraper/main/output/historique.json';
-const RAPPORT_URL    = 'https://raw.githubusercontent.com/MohtadiRomene/volz-scraper/main/output/rapport.json';
-const VOLS_URL       = 'https://raw.githubusercontent.com/MohtadiRomene/volz-scraper/main/output/tous-les-vols.json';
+const HISTORIQUE_URL = 'https://cdn.jsdelivr.net/gh/MohtadiRomene/volz-scraper@main/output/historique.json';
+const RAPPORT_URL    = 'https://cdn.jsdelivr.net/gh/MohtadiRomene/volz-scraper@main/output/rapport.json';
+const VOLS_URL       = 'https://cdn.jsdelivr.net/gh/MohtadiRomene/volz-scraper@main/output/tous-les-vols.json';
 
 export default function App() {
   const [vols,       setVols]       = useState([]);
