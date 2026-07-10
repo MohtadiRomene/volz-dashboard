@@ -4,31 +4,35 @@ import StatCards        from './components/StatCards';
 import PrixChart        from './components/PrixChart';
 import ChangementsTable from './components/ChangementsTable';
 import VolsTable        from './components/VolsTable';
+import PriceComparison  from './components/PriceComparison';
 
-// URL du JSON sur GitHub (remplace TON_USER et TON_REPO)
-// Remplace TON_USER par ton vrai username GitHub
-const HISTORIQUE_URL = 'https://cdn.jsdelivr.net/gh/MohtadiRomene/volz-scraper@main/output/historique.json';
-const RAPPORT_URL    = 'https://cdn.jsdelivr.net/gh/MohtadiRomene/volz-scraper@main/output/rapport.json';
-const VOLS_URL       = 'https://cdn.jsdelivr.net/gh/MohtadiRomene/volz-scraper@main/output/tous-les-vols.json';
+const BASE = 'https://cdn.jsdelivr.net/gh/MohtadiRomene/volz-scraper@main/output';
+const HISTORIQUE_URL  = `${BASE}/historique.json`;
+const RAPPORT_URL     = `${BASE}/rapport.json`;
+const VOLS_URL        = `${BASE}/tous-les-vols.json`;
+const COMPARISON_URL  = `${BASE}/comparison.json`;
 
 export default function App() {
-  const [vols,       setVols]       = useState([]);
-  const [historique, setHistorique] = useState([]);
-  const [rapport,    setRapport]    = useState(null);
-  const [loading,    setLoading]    = useState(true);
-  const [erreur,     setErreur]     = useState(null);
+  const [vols,          setVols]          = useState([]);
+  const [historique,    setHistorique]    = useState([]);
+  const [rapport,       setRapport]       = useState(null);
+  const [comparaisons,  setComparaisons]  = useState([]);
+  const [loading,       setLoading]       = useState(true);
+  const [erreur,        setErreur]        = useState(null);
 
   useEffect(() => {
     const charger = async () => {
       try {
-        const [h, r, v] = await Promise.all([
+        const [h, r, v, c] = await Promise.all([
           fetch(HISTORIQUE_URL).then(r => r.json()),
           fetch(RAPPORT_URL).then(r => r.json()),
           fetch(VOLS_URL).then(r => r.json()),
+          fetch(COMPARISON_URL).then(r => r.json()).catch(() => []),
         ]);
         setHistorique(h);
         setRapport(r);
         setVols(v);
+        setComparaisons(c);
       } catch (e) {
         setErreur('Impossible de charger les données. Vérifiez que les fichiers JSON sont bien sur GitHub.');
       } finally {
@@ -61,6 +65,7 @@ export default function App() {
       <Header rapport={rapport} />
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '24px 20px', display: 'flex', flexDirection: 'column', gap: 20 }}>
         <StatCards  vols={vols} changements={dernierChangements} rapport={rapport} />
+        {comparaisons.length > 0 && <PriceComparison comparaisons={comparaisons} />}
         <PrixChart  historique={historique} />
         <ChangementsTable changements={dernierChangements} />
         <VolsTable  vols={vols} />
