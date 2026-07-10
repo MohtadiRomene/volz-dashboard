@@ -2,20 +2,42 @@ import React from 'react';
 
 export default function Header({ rapport }) {
   return (
-    <div style={{ background: '#1a1a2e', color: '#fff', padding: '20px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <span style={{ fontSize: 28 }}>✈️</span>
+    <div style={{
+      background: 'linear-gradient(180deg, #0d1117 0%, #0b0f14 100%)',
+      borderBottom: '1px solid #1e2733',
+      padding: '18px 32px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div style={{
+          width: 40, height: 40, borderRadius: 10,
+          background: 'linear-gradient(135deg, #22d3ee22, #a78bfa22)',
+          border: '1px solid #1e2733',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 18,
+        }}>⚡</div>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 600 }}>Volz Price Dashboard</h1>
-          <p style={{ fontSize: 13, opacity: 0.6 }}>Suivi des prix en temps réel</p>
+          <h1 style={{ fontSize: 18, fontWeight: 700, margin: 0, letterSpacing: 0.3 }}>
+            FLIGHT PRICE INTELLIGENCE
+          </h1>
+          <p style={{ fontSize: 12, color: '#7d8a9e', margin: '2px 0 0', fontFamily: "'JetBrains Mono', monospace" }}>
+            volz.app × h24voyages.com — real-time comparison engine
+          </p>
         </div>
       </div>
-      {rapport && (
-        <div style={{ textAlign: 'right', fontSize: 13, opacity: 0.8 }}>
-          <div>Dernière mise à jour : <strong>{rapport.date}</strong></div>
-          <div>{rapport.nb_vols} vols scrapés en {rapport.duree_secondes}s</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#22c55e', fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
+          <span className="live-dot"></span> LIVE
         </div>
-      )}
+        {rapport && (
+          <div style={{ textAlign: 'right', fontSize: 12, color: '#7d8a9e', fontFamily: "'JetBrains Mono', monospace" }}>
+            <div>LAST SYNC · {rapport.date}</div>
+            <div style={{ color: '#4b5768' }}>{rapport.nb_vols} data points</div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
