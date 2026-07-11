@@ -5,8 +5,9 @@ import ComparisonChart  from './components/ComparisonChart';
 import PriceComparison  from './components/PriceComparison';
 
 const BASE = 'https://cdn.jsdelivr.net/gh/MohtadiRomene/volz-scraper@main/output';
-const RAPPORT_URL    = `${BASE}/rapport.json`;
-const COMPARISON_URL = `${BASE}/comparison.json`;
+const cacheBust = `?t=${Date.now()}`;
+const RAPPORT_URL    = `${BASE}/rapport.json${cacheBust}`;
+const COMPARISON_URL = `${BASE}/comparison.json${cacheBust}`;
 
 export default function App() {
   const [rapport, setRapport]           = useState(null);
@@ -18,8 +19,8 @@ export default function App() {
     const charger = async () => {
       try {
         const [r, c] = await Promise.all([
-          fetch(RAPPORT_URL).then(r => r.json()).catch(() => null),
-          fetch(COMPARISON_URL).then(r => r.json()),
+          fetch(RAPPORT_URL, { cache: 'no-store' }).then(r => r.json()).catch(() => null),
+          fetch(COMPARISON_URL, { cache: 'no-store' }).then(r => r.json()),
         ]);
         setRapport(r);
         setComparaisons(c);
