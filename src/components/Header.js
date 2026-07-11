@@ -34,7 +34,7 @@ export default function Header({ rapport }) {
         {rapport && (
           <div style={{ textAlign: 'right', fontSize: 12, color: '#7d8a9e', fontFamily: "'JetBrains Mono', monospace" }}>
             <div>LAST SYNC · {rapport.date}</div>
-            <div style={{ color: '#4b5768' }}>{rapport.nb_vols} data points</div>
+            <div style={{ color: '#4b5768' }}>{rapport.nb_vols_total?.toLocaleString('fr-FR')} data points</div>
           </div>
         )}
       </div>
